@@ -1,0 +1,380 @@
+{
+  "schema_version": "1.0",
+  "dataset": {
+    "name": "Indian Standards - rotating electrical machines (prototype subset)",
+    "version": "1.0.0",
+    "generated": "2026-09-27",
+    "organization": "Bureau of Indian Standards",
+    "product_category": "rotating electrical machines",
+    "record_count": 20,
+    "notes": [
+      "This is a LIMITED PROTOTYPE SUBSET focused on rotating electrical machines. It is NOT the complete BIS catalogue.",
+      "Only verified information is stored. standard_number values are transcribed verbatim from official BIS material concerning Indian Standards for electric/rotating electrical machines.",
+      "year is the year suffix of that same designator (for example IS 12615:2018 -> 2018); the validator rejects any year that contradicts the designator.",
+      "title, scope, status, revision, amendments, related_standards, references and certification were NOT supplied by the source material, so they are null / empty instead of being guessed.",
+      "source.url and source.document are null because the specific source document has not been recorded yet."
+    ]
+  },
+  "standards": [
+    {
+      "standard_number": "IS/IEC 60034-1:2022",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2022,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 12615:2018",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2018,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 996:2009",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2009,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 9283:2024",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 7538:1996",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 1996,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 14582:2021",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2021,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 14578:1999",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 1999,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 8151:2024",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 18073:2023",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2023,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS/IEC 60034-2-1:2024",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 4029:2010",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2010,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 9320:2025",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2025,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 7572:1974",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 1974,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 12075:2024",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 12065:2025",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2025,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 1231:2019",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2019,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 2223:1983",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 1983,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 6362:1995",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 1995,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS/IEC 60034-5:2020",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2020,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    },
+    {
+      "standard_number": "IS 13529:2021",
+      "title": null,
+      "scope": null,
+      "product_category": "rotating electrical machines",
+      "status": null,
+      "revision": null,
+      "year": 2021,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": null,
+        "document": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Optional RAG dependencies.
+#
+# ChromaDB is the first vector database implementation and is imported lazily,
+# so the API runs without it (recommendations simply stay in "not configured"
+# state). Install with:
+#     pip install -r requirements-rag.txt
+chromadb>=0.5

@@ -1,0 +1,88 @@
+[
+ {
+  "name": "1. IE3 motor",
+  "req": "15 kW IE3 three-phase squirrel cage induction motor, foot mounted, IP55, 415 V, 50 Hz",
+  "stage": "ai_reasoning_unavailable",
+  "ai": "unavailable",
+  "reason": "ai_unavailable",
+  "usage": null,
+  "target": null,
+  "cands": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "recs": []
+ },
+ {
+  "name": "2. noise/vibration",
+  "req": "Noise and vibration requirements for rotating electrical machines",
+  "stage": "ai_reasoning_ranking",
+  "ai": "completed",
+  "reason": null,
+  "usage": null,
+  "target": "Rotating electrical machines for which noise and vibration performance specifications are required.",
+  "cands": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "recs": [
+   [
+    "IS 12065:2025",
+    "direct",
+    0.92
+   ],
+   [
+    "IS 12075:2024",
+    "needs_verification",
+    0.48
+   ]
+  ]
+ },
+ {
+  "name": "3. submersible pump",
+  "req": "Supply of submersible pump sets",
+  "stage": "ai_reasoning_unavailable",
+  "ai": "unavailable",
+  "reason": "ai_unavailable",
+  "usage": null,
+  "target": null,
+  "cands": [
+   null,
+   null,
+   null
+  ],
+  "recs": []
+ },
+ {
+  "name": "4. packaged water",
+  "req": "BIS standards applicable to packaged drinking water manufacturing and bottling plant",
+  "stage": "ai_reasoning_unavailable",
+  "ai": "unavailable",
+  "reason": "ai_unavailable",
+  "usage": null,
+  "target": null,
+  "cands": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "recs": []
+ }
+]

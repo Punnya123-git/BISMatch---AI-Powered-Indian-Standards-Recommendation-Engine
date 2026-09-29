@@ -1,0 +1,385 @@
+{
+  "dataset_version": "1.1.0-bis-enriched-draft",
+  "description": "Initial 20-standard prototype dataset for SIH 2026 PS 108, focused on rotating electrical machines. Fields are populated only from BIS sources checked during research; unverified fields remain null/empty.",
+  "source_note": "Primary source: BIS Compendium of Indian Standards on Electric Motors. Current-version/status checks additionally use BIS Know Your Standard, BIS Archive Standard of the Month, and BIS LIMS where available.",
+  "standards": [
+    {
+      "standard_number": "IS/IEC 60034-1:2022",
+      "title": "Rotating Electrical Machines – Part 1: Rating and Performance (Excluding Machines for Traction Vehicles)",
+      "scope": "Core standard for essential performance parameters and rating methods of rotating electrical machines; covers general-purpose AC and DC machines, including temperature rise, output ratings, duty types, efficiency and other performance metrics.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; listed in BIS electric-motors compendium as identical under single numbering.",
+      "revision": "2022",
+      "year": 2022,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-1:2022"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 12615:2018",
+      "title": "Line-Operated Three-Phase a.c. Motors – Efficiency Classes and Performance Specification (IE Code)",
+      "scope": "Specifies efficiency classifications, testing methods, losses and performance benchmarks for line-operated three-phase AC motors.",
+      "product_category": "rotating electrical machines",
+      "status": "A newer BIS revision, IS 12615:2026, is listed in the current BIS archive; the 2018 edition should not be treated as the latest version.",
+      "revision": "2018 (Third Revision)",
+      "year": 2018,
+      "amendments": [],
+      "related_standards": [
+        "IS 1231:2019",
+        "IS/IEC 60034-1:2022"
+      ],
+      "references": [
+        "IEC 60034-30-1:2014 (modified)"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.bis.gov.in/archive-standard-of-the-month/?lang=en",
+        "document": "BIS Archive Standard of the Month; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 996:2009",
+      "title": "Single Phase a.c. Induction Motors for General Purpose – Specification",
+      "scope": "Covers constructional, performance and test requirements for single-phase induction motors, including duty types, ratings, starting methods and mechanical design details.",
+      "product_category": "rotating electrical machines",
+      "status": "A newer BIS revision, IS 996:2025 (Fourth Revision), is currently listed in BIS sources; the 2009 edition should not be treated as the latest version.",
+      "revision": "2009 (Third Revision)",
+      "year": 2009,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://standards.bis.gov.in/website/standard-details",
+        "document": "BIS Know Your Standard / BIS LIMS; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 9283:2024",
+      "title": "Line Operated A.C. Motors for Submersible Pump Sets – Specification (Third Revision)",
+      "scope": "Specifies design, construction and performance of AC motors used for submersible pump sets, including single-phase and three-phase motors and oil-filled and water-filled types; addresses submerged operation, sealing and thrust-bearing requirements.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; Third Revision.",
+      "revision": "2024 (Third Revision)",
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": "BIS product-manual material is listed for IS 9283:2024.",
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.bis.gov.in/product-certification/product-specific-information-2/product-manualsmk/?lang=en",
+        "document": "BIS Product Manuals; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 7538:1996",
+      "title": "Three-Phase Squirrel Cage Induction Motors for Centrifugal Pumps for Agricultural Application – Specification (First Revision)",
+      "scope": "Requirements for three-phase squirrel-cage induction motors used to drive centrifugal water pumps in agriculture, including motor rating, voltage range, high-ambient-temperature design, overload capacity and mechanical features.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; First Revision; BIS standards portal shows it as reviewed in 2026.",
+      "revision": "1996 (First Revision)",
+      "year": 1996,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://standards.bis.gov.in/website/standard-details",
+        "document": "BIS Know Your Standard; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 14582:2021",
+      "title": "Single-Phase Small AC Electric Motors for Centrifugal Pumps for Agricultural Applications",
+      "scope": "Covers small-capacity single-phase induction motors used with shallow-well or surface-mounted centrifugal pumps, including starting torque, voltage tolerance, capacitor specifications and thermal protection.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; BIS standards portal shows it as reviewed in 2026.",
+      "revision": "2021",
+      "year": 2021,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://standards.bis.gov.in/website/standard-details",
+        "document": "BIS Know Your Standard; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 14578:1999",
+      "title": "Three-Phase Induction Motors for Use in Nuclear Power Plants – Specification",
+      "scope": "Specifies design, construction and testing requirements for induction motors used in nuclear power installations, including enhanced safety, reliability and environmental qualification considerations.",
+      "product_category": "rotating electrical machines",
+      "status": "Under revision according to the BIS electric-motors compendium.",
+      "revision": "1999",
+      "year": 1999,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 8151:2024",
+      "title": "Single-Speed Three-Phase Induction Motors for Driving Lifts – Specification (First Revision)",
+      "scope": "Specifies performance and constructional requirements for single-speed three-phase induction motors used in lift applications, including duty, thermal classification, starting current, torque, vibration, insulation and protection classes.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; First Revision; BIS standards portal shows it as reviewed in 2024.",
+      "revision": "2024 (First Revision)",
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://standards.bis.gov.in/website/standard-details",
+        "document": "BIS Know Your Standard; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 18073:2023",
+      "title": "Electric Traction Motor – Performance and Functional Requirements",
+      "scope": "Establishes performance and functional requirements for electric traction motors, including safety, environmental suitability, electromagnetic compatibility and durability.",
+      "product_category": "rotating electrical machines",
+      "status": "Published.",
+      "revision": "2023",
+      "year": 2023,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS/IEC 60034-2-1:2024",
+      "title": "Rotating Electrical Machines – Part 2: Determining Losses and Efficiency from Tests – Section 1: Standard Methods (Excluding Machines for Traction Vehicles)",
+      "scope": "Specifies standardized direct and indirect test methods for determining total losses and efficiency of rotating electrical machines, with methods including input-output, loss summation and calorimetric approaches.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; identical under single numbering.",
+      "revision": "2024",
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-2-1:2024"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 4029:2010",
+      "title": "Guide for Testing Three-Phase Induction Motors (First Revision)",
+      "scope": "Guidance for type, routine and special tests of three-phase induction motors, including insulation resistance, winding resistance, no-load/full-load, vibration, noise and heating tests.",
+      "product_category": "rotating electrical machines",
+      "status": "Under revision according to the BIS electric-motors compendium.",
+      "revision": "2010 (First Revision)",
+      "year": 2010,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 9320:2025",
+      "title": "Guide for Testing Direct Current (DC) Machines (First Revision)",
+      "scope": "Test procedures for DC motors and generators, including commutation, insulation, armature reaction, temperature rise and efficiency tests.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; First Revision; BIS standards portal shows it as reviewed in 2025.",
+      "revision": "2025 (First Revision)",
+      "year": 2025,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://standards.bis.gov.in/website/standard-details",
+        "document": "BIS Know Your Standard; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 7572:1974",
+      "title": "Guide for Testing Single-Phase AC and Universal Motors",
+      "scope": "Specifies procedures for testing small single-phase AC motors and universal motors, including performance, dielectric strength, efficiency and thermal-limit checks.",
+      "product_category": "rotating electrical machines",
+      "status": "Under revision according to the BIS electric-motors compendium.",
+      "revision": "1974",
+      "year": 1974,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 12075:2024",
+      "title": "Mechanical Vibration of Rotating Electrical Machines with Shaft Heights 56 mm and Higher – Measurement, Evaluation and Limits of Vibration Severity",
+      "scope": "Details measurement and assessment of vibration severity in rotating electrical machines with shaft heights of 56 mm and higher, including limits used to prevent mechanical damage and bearing/structural problems.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; modified adoption of IEC 60034-14:2018.",
+      "revision": "2024",
+      "year": 2024,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-14:2018 (modified)"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 12065:2025",
+      "title": "Permissible Limits of Noise Levels for Rotating Electrical Machines",
+      "scope": "Defines measurement procedures and permissible noise limits for rotating electrical machines under standard operating conditions.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; modified adoption of IEC 60034-9:2021.",
+      "revision": "2025",
+      "year": 2025,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-9:2021 (modified)"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 1231:2019",
+      "title": "Dimensions and Output Series of Foot-Mounted Induction Motors – Frame Numbers 56 to 315 L (Fourth Revision)",
+      "scope": "Specifies frame sizes, mounting dimensions and shaft details for foot-mounted squirrel-cage induction motors, supporting dimensional compatibility and interchangeability.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; Fourth Revision.",
+      "revision": "2019 (Fourth Revision)",
+      "year": 2019,
+      "amendments": [],
+      "related_standards": [],
+      "references": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/WCETD24926349_24022025_2.pdf",
+        "document": "ETD 15 Program of Work / referred Indian standards; BIS Electric Motors Compendium"
+      }
+    },
+    {
+      "standard_number": "IS 2223:1983",
+      "title": "Dimensions of Flange-Mounted AC Induction Motors",
+      "scope": "Covers flange mounting dimensions (including B5 and B14 arrangements) of AC induction motors for compact applications such as gearboxes or pumps.",
+      "product_category": "rotating electrical machines",
+      "status": "Under revision according to the BIS electric-motors compendium.",
+      "revision": "1983",
+      "year": 1983,
+      "amendments": [],
+      "related_standards": [],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 6362:1995",
+      "title": "Designation of Methods of Cooling for Rotating Electrical Machines",
+      "scope": "Establishes a coded system for identifying cooling methods used in electrical machines, supporting thermal-performance classification and motor selection.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; identical adoption of IEC 60034-6.",
+      "revision": "1995 (First Revision)",
+      "year": 1995,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-6"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS/IEC 60034-5:2020",
+      "title": "Rotating Electrical Machines – Part 5: Degrees of Protection Provided by the Integral Design (IP Code) – Classification",
+      "scope": "Specifies enclosure protection levels against ingress of solid objects and water for rotating electrical machines using IP classification.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; identical under single numbering.",
+      "revision": "2020",
+      "year": 2020,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-5:2020"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://www.services.bis.gov.in/tmp/compendium_2025-06-02-05-07-45.pdf",
+        "document": "Compendium of Indian Standards on Electric Motors"
+      }
+    },
+    {
+      "standard_number": "IS 13529:2021",
+      "title": "Guide on Effects of Unbalanced Voltages on the Performance of Three-Phase Cage Induction Motors (First Revision)",
+      "scope": "Guidance on the effects of voltage unbalance on the performance, efficiency and thermal behavior of three-phase squirrel-cage induction motors, including quantification and derating considerations.",
+      "product_category": "rotating electrical machines",
+      "status": "Published; First Revision; BIS standards portal shows it as reviewed in 2025.",
+      "revision": "2021 (First Revision)",
+      "year": 2021,
+      "amendments": [],
+      "related_standards": [],
+      "references": [
+        "IEC 60034-26:2006 (modified)"
+      ],
+      "certification": null,
+      "source": {
+        "organization": "Bureau of Indian Standards",
+        "url": "https://standards.bis.gov.in/website/standard-details",
+        "document": "BIS Know Your Standard; BIS Electric Motors Compendium"
+      }
+    }
+  ]
+}
