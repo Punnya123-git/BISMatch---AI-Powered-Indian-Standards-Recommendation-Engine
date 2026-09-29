@@ -1,0 +1,2 @@
+# BISMatch---AI-Powered-Indian-Standards-Recommendation-Engine
+An AI-powered web application that analyzes procurement requirements and recommends relevant Indian Standards using semantic search, RAG, embeddings, ChromaDB, and LLM-based reasoning. It identifies applicable, related, and supporting standards while considering scope, technical specifications, revisions, amendments, and certification information.
