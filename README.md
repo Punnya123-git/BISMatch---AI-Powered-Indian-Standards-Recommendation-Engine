@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SIH 2026 — Indian Standards Recommendation Engine
 
 Backend and frontend **foundation** for an AI-assisted engine that maps a procurement
@@ -463,3 +464,7 @@ npm run dev
 npm run build
 npm run preview
 ```
+=======
+# BISMatch---AI-Powered-Indian-Standards-Recommendation-Engine
+An AI-powered web application that analyzes procurement requirements and recommends relevant Indian Standards using semantic search, RAG, embeddings, ChromaDB, and LLM-based reasoning. It identifies applicable, related, and supporting standards while considering scope, technical specifications, revisions, amendments, and certification information.
+>>>>>>> 40118f9dc17abba646df94e353c6997bb9d1282d
