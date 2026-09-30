@@ -12,10 +12,17 @@ Honesty rules that matter for the demo:
   weights are missing, the provider reports ``not configured`` with the reason;
 * weights are downloaded once by Chroma into the user cache directory. After that
   first download the provider works fully offline.
+
+This provider needs **no API key**. ``EMBEDDING_PROVIDER=onnx_minilm`` and
+``EMBEDDING_MODEL=all-MiniLM-L6-v2`` are sufficient to configure it; leaving
+``EMBEDDING_MODEL`` empty also works and selects the same model. The name is
+matched case-insensitively, so the value written in a deployment's environment
+is accepted exactly as written.
 """
 
 from __future__ import annotations
 
+import importlib
 from typing import Any, Sequence
 
 from app.core.config import Settings, get_settings
@@ -34,6 +41,27 @@ DEFAULT_MODEL = "all-MiniLM-L6-v2"
 #: Output length of that model.
 MODEL_DIMENSION = 384
 
+#: Names that identify the same ONNX weights. Chroma/Hugging Face publish the
+#: model under several spellings, and ``EMBEDDING_MODEL`` is typed by hand in
+#: .env files, so all of these must resolve to this provider.
+_MODEL_ALIASES = frozenset(
+    {
+        DEFAULT_MODEL.lower(),
+        f"sentence-transformers/{DEFAULT_MODEL}".lower(),
+        f"onnx/{DEFAULT_MODEL}".lower(),
+    }
+)
+
+
+def _is_this_model(model: str) -> bool:
+    """True when ``model`` names the MiniLM build this provider can run.
+
+    The comparison is case-insensitive and ignores surrounding whitespace:
+    ``EMBEDDING_MODEL=all-MiniLM-L6-v2`` is the documented production value and
+    must be accepted as-is, exactly as it appears in the deployed environment.
+    """
+    return model.strip().lower() in _MODEL_ALIASES
+
 
 class LocalOnnxMiniLMEmbeddingProvider(EmbeddingProvider):
     """Embeds text locally with the MiniLM ONNX model bundled by ``chromadb``."""
@@ -49,29 +77,41 @@ class LocalOnnxMiniLMEmbeddingProvider(EmbeddingProvider):
     @property
     def model(self) -> str | None:
         model = (self._settings.embedding_model or "").strip()
-        return model or DEFAULT_MODEL
+        if not model or _is_this_model(model):
+            return DEFAULT_MODEL
+        # A name this provider cannot serve is reported verbatim so the
+        # operator can see what was actually configured.
+        return model
 
     def _check(self) -> str | None:
         """Return why the model cannot be used here, or ``None`` when usable."""
         if self._unusable_reason is not None:
             return self._unusable_reason
         model = (self._settings.embedding_model or "").strip()
-        if model and model.lower() != DEFAULT_MODEL:
+        if model and not _is_this_model(model):
             self._unusable_reason = (
                 f"EMBEDDING_MODEL '{model}' is not supported by this provider; it "
                 f"runs '{DEFAULT_MODEL}' only. Choose a provider that serves the "
                 "model you want (for example EMBEDDING_PROVIDER=openai_compatible)."
             )
             return self._unusable_reason
-        try:
-            import chromadb.utils.embedding_functions  # noqa: F401 - availability
-        except Exception as exc:  # noqa: BLE001 - broken/incomplete install
-            self._unusable_reason = (
-                "The local MiniLM model needs the optional 'chromadb' package. "
-                "Install it with: pip install -r requirements-rag.txt"
-                f" (import failed: {exc})"
-            )
-            return self._unusable_reason
+        # Probe the modules the model actually executes on, not just chromadb.
+        # chromadb imports them lazily, so importing it alone would report
+        # "configured" on a machine that cannot run the model at all.
+        for module, package in (
+            ("chromadb.utils.embedding_functions", "chromadb"),
+            ("onnxruntime", "onnxruntime"),
+            ("tokenizers", "tokenizers"),
+        ):
+            try:
+                importlib.import_module(module)
+            except Exception as exc:  # noqa: BLE001 - broken/incomplete install
+                self._unusable_reason = (
+                    f"The local MiniLM model needs '{package}', which is not "
+                    "importable in this environment. Install the RAG extras with: "
+                    f"pip install -r requirements-rag.txt (import failed: {exc})"
+                )
+                return self._unusable_reason
         return None
 
     @property

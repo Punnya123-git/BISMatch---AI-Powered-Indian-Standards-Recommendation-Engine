@@ -1,0 +1,63 @@
+# Render blueprint for the BISMatch backend.
+#
+# Design note - why there is NO indexing in the build command:
+# the vector index is built by the application at start-up
+# (AUTO_INDEX_ON_STARTUP=true, see backend/app/standards/bootstrap.py). A build
+# step would have to download the ONNX weights and write a Chroma store into a
+# filesystem Render discards at runtime, adding failure modes without making the
+# running service any more ready. The build only installs dependencies; the
+# running process prepares its own index.
+#
+# IMPORTANT - rootDir must stay at the repository root (not "backend"): the
+# verified catalogue lives in data/standards/ at the root and STANDARDS_DATASET_PATH
+# resolves against the project root. Pointing Render at backend/ hides data/.
+services:
+  - type: web
+    name: bismatch-api
+    runtime: python
+    rootDir: .
+    plan: free
+    healthCheckPath: /api/health
+    # The ONNX warm-up is best effort and suffixed with "|| true": a cold start
+    # downloads the weights itself, so a flaky download must never fail a deploy.
+    buildCommand: >-
+      pip install --upgrade pip
+      && pip install -r backend/requirements.txt
+      && (python -c "from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2; ONNXMiniLM_L6_V2()(['warmup'])" || true)
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # --- Embeddings: local ONNX MiniLM, no API key required ---
+      - key: EMBEDDING_PROVIDER
+        value: onnx_minilm
+      - key: EMBEDDING_MODEL
+        value: all-MiniLM-L6-v2
+      - key: EMBEDDING_API_KEY
+        value: ""
+      # --- Vector store ---
+      - key: VECTOR_STORE_PROVIDER
+        value: chroma
+      # --- Verified catalogue (relative to the project root) ---
+      - key: STANDARDS_DATASET_PATH
+        value: ../data/standards/standards_enriched_bis_verified.json
+      # --- Build the index at start-up, not during the build ---
+      - key: AUTO_INDEX_ON_STARTUP
+        value: "true"
+      # --- LLM: Groq through the OpenAI-compatible provider ---
+      # LLM_API_KEY is deliberately NOT defined here: set it as a secret in the
+      # Render dashboard so no key is ever committed to this repository.
+      - key: LLM_PROVIDER
+        value: openai_compatible
+      - key: LLM_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: LLM_TEMPERATURE
+        value: "0"
+      - key: LLM_MAX_TOKENS
+        value: "3800"
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO

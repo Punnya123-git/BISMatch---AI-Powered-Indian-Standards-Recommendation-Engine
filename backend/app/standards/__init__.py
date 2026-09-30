@@ -6,10 +6,12 @@ The package keeps one responsibility per module:
 * :mod:`app.standards.dataset_loader`  - resolve path, read JSON, map to entities
 * :mod:`app.standards.documents`       - record -> searchable text / metadata
 * :mod:`app.standards.indexing_service`- dataset -> chunks -> embeddings -> Chroma
+* :mod:`app.standards.bootstrap`       - build that index once, at process start
 
 No module here invents standards data, and none of them talks HTTP.
 """
 
+from app.standards.bootstrap import ensure_standards_index
 from app.standards.dataset_loader import (
     StandardsDatasetLoader,
     get_standards_dataset_loader,
@@ -60,6 +62,7 @@ __all__ = [
     "build_standard_documents",
     "designation_key",
     "designation_year",
+    "ensure_standards_index",
     "get_standards_dataset_loader",
     "get_standards_indexing_service",
     "standard_chunk_metadata",

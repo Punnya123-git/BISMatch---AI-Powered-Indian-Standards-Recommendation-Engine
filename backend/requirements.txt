@@ -1,4 +1,11 @@
 # Core backend runtime dependencies (Python 3.11+).
+#
+# This file is the *complete* runtime set for a deployment: Render (and any
+# other host) installs only this file, so everything the application needs to
+# serve real recommendations must be listed here. Anything omitted is absent in
+# production even though it happens to exist on a developer machine, which is
+# exactly how an app ends up reporting "embedding provider not configured"
+# while the correct environment variables are present.
 fastapi>=0.115,<1.0
 uvicorn[standard]>=0.30
 pydantic>=2.12
@@ -7,3 +14,16 @@ python-multipart>=0.0.9
 pypdf>=4.2
 # Used by the openai_compatible embedding provider (app/rag/embeddings/providers).
 httpx>=0.27
+
+# --- Vector store + local embeddings (required for retrieval) --------------
+# chromadb provides the ChromaDB vector store *and* the ONNX build of
+# all-MiniLM-L6-v2 used by EMBEDDING_PROVIDER=onnx_minilm. onnxruntime and
+# tokenizers are pinned explicitly because chromadb imports them lazily: they
+# are not guaranteed by the chromadb dependency graph on every resolver, and
+# when they are missing the local embedding provider correctly refuses to run
+# and reports itself as "not configured".
+# This is what makes onnx_minilm work with no embedding API key at all.
+chromadb>=0.5
+onnxruntime>=1.14.1
+tokenizers>=0.13.2
+

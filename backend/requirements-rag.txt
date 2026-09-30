@@ -1,7 +1,10 @@
-# Optional RAG dependencies.
+# RAG dependencies (vector store + local ONNX embeddings).
 #
-# ChromaDB is the first vector database implementation and is imported lazily,
-# so the API runs without it (recommendations simply stay in "not configured"
-# state). Install with:
-#     pip install -r requirements-rag.txt
-chromadb>=0.5
+# These are now part of the *core* runtime set, because a deployed instance
+# must be able to serve real retrieval out of the box. This file is kept as a
+# compatibility shim for existing setup instructions; it simply re-uses
+# requirements.txt so the two can never drift apart.
+#
+#     pip install -r requirements-rag.txt   # equivalent to requirements.txt
+-r requirements.txt
+

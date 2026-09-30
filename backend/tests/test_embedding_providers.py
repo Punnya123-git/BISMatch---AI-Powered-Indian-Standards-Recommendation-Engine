@@ -9,6 +9,7 @@ here; that is what ``tests/test_semantic_search_live.py`` does.
 
 from __future__ import annotations
 
+import importlib
 import json
 
 import httpx
@@ -89,6 +90,72 @@ def test_local_provider_refuses_a_model_it_cannot_run() -> None:
 
 def test_local_provider_returns_no_vectors_for_no_text() -> None:
     assert LocalOnnxMiniLMEmbeddingProvider(_settings()).embed_documents([]) == []
+
+
+@pytest.mark.parametrize(
+    "configured_model",
+    [
+        "all-MiniLM-L6-v2",  # exactly what Render deploys
+        "all-minilm-l6-v2",  # lower case
+        "ALL-MINILM-L6-V2",  # upper case
+        "  all-MiniLM-L6-v2  ",  # stray whitespace from a pasted value
+        "sentence-transformers/all-MiniLM-L6-v2",  # Hugging Face repo name
+        "",  # unset: the provider's own default
+    ],
+)
+def test_local_provider_accepts_the_deployed_model_name(
+    configured_model: str,
+) -> None:
+    """The documented EMBEDDING_MODEL value must configure the provider.
+
+    Regression guard: the model name was compared as ``model.lower()`` against
+    the mixed-case constant, so the *correct* value was rejected and the
+    Render build reported "not configured" for its own configuration.
+    """
+    provider = LocalOnnxMiniLMEmbeddingProvider(
+        _settings(embedding_provider="onnx_minilm", embedding_model=configured_model)
+    )
+    assert provider.is_configured is True, provider.reason
+    assert provider.reason is None
+    assert provider.model == DEFAULT_MODEL
+    assert provider.describe() == f"onnx_minilm (configured, model={DEFAULT_MODEL})"
+
+
+def test_local_provider_is_selected_by_the_environment_without_an_api_key() -> None:
+    """EMBEDDING_PROVIDER + EMBEDDING_MODEL alone must be enough - no API key."""
+    pytest.importorskip("chromadb")
+    settings = _settings(
+        embedding_provider="onnx_minilm",
+        embedding_model="all-MiniLM-L6-v2",
+        embedding_api_key=None,
+    )
+    provider = factory._build_provider(settings)
+
+    assert isinstance(provider, LocalOnnxMiniLMEmbeddingProvider)
+    assert provider.is_configured is True, provider.reason
+
+
+def test_local_provider_reports_a_missing_onnx_runtime_honestly(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Without onnxruntime the provider must say so, not pretend to embed."""
+    real_import_module = importlib.import_module
+
+    def _missing_onnxruntime(name: str, *args: object, **kwargs: object) -> object:
+        if name == "onnxruntime":
+            raise ImportError("No module named 'onnxruntime'")
+        return real_import_module(name, *args, **kwargs)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(
+        "app.rag.embeddings.providers.local_onnx.importlib.import_module",
+        _missing_onnxruntime,
+    )
+    provider = LocalOnnxMiniLMEmbeddingProvider(
+        _settings(embedding_model="all-MiniLM-L6-v2")
+    )
+    assert provider.is_configured is False
+    assert "onnxruntime" in (provider.reason or "")
+    assert "requirements-rag.txt" in (provider.reason or "")
 
 
 # --- OpenAI-compatible provider -------------------------------------------

@@ -11,8 +11,9 @@ Nothing is fabricated at any step:
 * chunking uses :mod:`app.rag.chunking` and writing uses
   :meth:`RecommendationPipeline.index_chunks`, so vectors are always produced by
   the configured provider;
-* indexing is never triggered by the API at start-up - run it explicitly with
-  ``python -m app.rag.index_standards``.
+* indexing is never triggered implicitly by a request. It is built either
+  explicitly with ``python -m app.rag.index_standards`` or once at process
+  start by :mod:`app.standards.bootstrap`, and both write only real vectors.
 """
 
 from __future__ import annotations
@@ -135,6 +136,83 @@ class StandardsIndexingService:
         except AppError:
             return 0
 
+    def stored_chunk_count(self) -> int:
+        """How many chunks the vector store currently holds (0 when unavailable)."""
+        return self._stored_chunk_count()
+
+    def expected_chunk_count(self) -> int:
+        """How many chunks the configured dataset produces.
+
+        Pure preparation - the dataset is read, rendered and chunked, but
+        nothing is embedded and nothing is written. Cheap enough to call on
+        every process start to decide whether an index is already current.
+        """
+        dataset = self._loader.load()
+        return len(self.prepare_chunks(build_standard_documents(dataset)))
+
+    def is_index_current(self) -> bool:
+        """True when the store already holds every chunk of the current dataset.
+
+        Comparing against the *expected* count (instead of "is it non-empty")
+        also catches a half-finished previous run, which would otherwise look
+        like a finished index.
+        """
+        try:
+            expected = self.expected_chunk_count()
+        except AppError:
+            return False
+        if expected <= 0:
+            return False
+        return self._stored_chunk_count() == expected
+
+    def index_if_needed(self, *, force: bool = False) -> IndexingReport:
+        """Build the index only when the store does not already match the dataset.
+
+        Idempotent by construction: chunk ids are derived from the record and
+        the text, and the store upserts, so re-running converges on the same
+        collection instead of duplicating it. ``reset`` is deliberately not
+        used here - it would also drop vectors belonging to uploaded documents,
+        which share the same collection.
+        """
+        if not force and self.is_index_current():
+            embedding, vector_store = self._component_descriptions()
+            stored = self._stored_chunk_count()
+            return IndexingReport(
+                status=STATUS_INDEXED,
+                message=(
+                    f"The standards index is already up to date: {stored} chunk(s) "
+                    f"in the '{vector_store}' store match the configured dataset."
+                ),
+                embedding_provider=embedding,
+                vector_store=vector_store,
+                indexed_chunks=stored,
+            )
+        return self.index()
+
+    def _embedding_reasons(self) -> list[str]:
+        """Explain why nothing could be embedded, using the provider's own words.
+
+        The configured provider knows precisely what is missing, so its
+        ``reason`` is quoted verbatim. The generic hint is phrased per provider:
+        the local ONNX model needs no API key, while the remote providers do.
+        """
+        provider = self._pipeline.embedding_provider
+        detail = getattr(provider, "reason", None)
+        if provider.provider_name == "onnx_minilm":
+            hint = (
+                "Set EMBEDDING_PROVIDER=onnx_minilm (optionally "
+                "EMBEDDING_MODEL=all-MiniLM-L6-v2) in the backend environment, "
+                "then run this command again. No EMBEDDING_API_KEY is needed."
+            )
+        else:
+            hint = (
+                "Set EMBEDDING_PROVIDER, EMBEDDING_MODEL and EMBEDDING_API_KEY in "
+                "the backend environment, then run this command again."
+            )
+        reasons = [reason for reason in (detail, hint) if reason]
+        reasons.append("No placeholder or fake embeddings are ever generated.")
+        return reasons
+
     # --- entry point ------------------------------------------------------
     def index(self, *, reset: bool = False) -> IndexingReport:
         """Load, prepare and index the dataset, reporting the honest outcome."""
@@ -178,11 +256,7 @@ class StandardsIndexingService:
             report.document_count = len(documents)
             report.chunk_count = len(chunks)
             report.indexed_chunks = self._stored_chunk_count()
-            report.reasons = [
-                "Set EMBEDDING_PROVIDER, EMBEDDING_MODEL and EMBEDDING_API_KEY in "
-                "backend/.env, then run this command again.",
-                "No placeholder or fake embeddings are ever generated.",
-            ]
+            report.reasons = self._embedding_reasons()
             return report
 
         try:

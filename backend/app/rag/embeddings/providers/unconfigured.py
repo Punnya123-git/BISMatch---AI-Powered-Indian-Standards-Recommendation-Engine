@@ -35,9 +35,11 @@ class UnconfiguredEmbeddingProvider(EmbeddingProvider):
 
     def _fail(self) -> ProviderNotConfiguredError:
         return ProviderNotConfiguredError(
-            f"{self.reason} Set EMBEDDING_PROVIDER, EMBEDDING_MODEL and "
-            "EMBEDDING_API_KEY in the backend environment before indexing or "
-            "searching standards."
+            f"{self.reason} Set EMBEDDING_PROVIDER in the backend environment "
+            "before indexing or searching standards. Use EMBEDDING_PROVIDER="
+            "onnx_minilm to run the local model with no API key (optionally "
+            "EMBEDDING_MODEL=all-MiniLM-L6-v2), or EMBEDDING_PROVIDER="
+            "openai_compatible with EMBEDDING_MODEL and EMBEDDING_API_KEY."
         )
 
     def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:

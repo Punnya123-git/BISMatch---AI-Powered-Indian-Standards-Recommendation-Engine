@@ -83,8 +83,14 @@ class RecommendationPipeline:
         if not self.embedding_provider.is_configured:
             reasons.append(
                 "No embedding provider is configured "
-                "(EMBEDDING_PROVIDER / EMBEDDING_MODEL / EMBEDDING_API_KEY)."
+                "(EMBEDDING_PROVIDER / EMBEDDING_MODEL / EMBEDDING_API_KEY). "
+                "The local provider 'onnx_minilm' needs no API key: set "
+                "EMBEDDING_PROVIDER=onnx_minilm and optionally "
+                "EMBEDDING_MODEL=all-MiniLM-L6-v2."
             )
+            detail = getattr(self.embedding_provider, "reason", None)
+            if detail:
+                reasons.append(detail)
 
         vector_store_status = "unavailable"
         try:

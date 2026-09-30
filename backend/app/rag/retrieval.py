@@ -67,7 +67,9 @@ class Retriever:
         if not self._embedding_provider.is_configured:
             raise ProviderNotConfiguredError(
                 "Semantic search needs an embedding provider. Set "
-                "EMBEDDING_PROVIDER, EMBEDDING_MODEL and EMBEDDING_API_KEY."
+                "EMBEDDING_PROVIDER in the backend environment: "
+                "EMBEDDING_PROVIDER=onnx_minilm runs the local model with no "
+                "API key (optionally EMBEDDING_MODEL=all-MiniLM-L6-v2)."
             )
 
         limit = top_k or get_settings().retrieval_top_k

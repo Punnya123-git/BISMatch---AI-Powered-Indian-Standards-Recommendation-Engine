@@ -17,6 +17,23 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
 PROJECT_ROOT = BACKEND_ROOT.parent
 
+#: Verified catalogues that ship with the repository, richest first. Used when
+#: STANDARDS_DATASET_PATH is not set, so a deployment works with no catalogue
+#: configuration at all. These are real, committed BIS records - the fallback
+#: is never invented data, and it is only used when the file actually exists.
+SHIPPED_STANDARDS_DATASETS = (
+    PROJECT_ROOT / "data" / "standards" / "standards_enriched_bis_verified.json",
+    PROJECT_ROOT / "data" / "standards" / "standards.json",
+)
+
+
+def default_standards_dataset_path() -> Path | None:
+    """The first shipped catalogue present on disk, or ``None`` if there is none."""
+    for candidate in SHIPPED_STANDARDS_DATASETS:
+        if candidate.is_file():
+            return candidate
+    return None
+
 
 class Settings(BaseSettings):
     """Strongly typed view over the environment."""
@@ -83,7 +100,18 @@ class Settings(BaseSettings):
     database_url: str | None = None
 
     # --- Standards dataset (must be supplied, never invented) -------------
-    standards_dataset_path: Path | None = None
+    # Defaults to the verified catalogue that ships with the repository, so a
+    # deployed instance is never left without a catalogue just because the
+    # environment variable was not set. Set STANDARDS_DATASET_PATH to override.
+    standards_dataset_path: Path | None = Field(
+        default_factory=default_standards_dataset_path
+    )
+
+    # --- Start-up initialisation ------------------------------------------
+    # Build the standards index at application start when the store does not
+    # already match the dataset. This is what makes deployment independent of a
+    # build-time indexing step (see app/standards/bootstrap.py).
+    auto_index_on_startup: bool = True
 
     # --- Derived paths ---------------------------------------------------
     @property
